@@ -18,18 +18,7 @@ const options = {
   dist: "dist"
 }
 
-//gulp scripts--> concatenate, minify into dist/scripts/all.min.js + source maps
-
-//gulp styles--> compile, concatenate, minify into dist/styles/all.min.css + source maps
-
-//gulp images--> optimize the size --> dist/content
-
-//gulp clean--> delete all of the files and folders in the dist folder
-
-//gulp build--> run the clean, scripts, styles, and images tasks
-
-//gulp--> run the build task and serve my project using a local web server
-
+//Concatenating scripts and making sorce map
 gulp.task('concatScripts', () => {
   return gulp.src([
         options.src + '/js/circle/jquery.js',
@@ -43,6 +32,7 @@ gulp.task('concatScripts', () => {
       .pipe(gulp.dest(options.dist + '/scripts'))
 });
 
+//Minifying scripts
 gulp.task('scripts', ["concatScripts"], function() {
   return gulp.src(options.src + "/js/global.js")
     .pipe(uglify())
@@ -70,6 +60,11 @@ gulp.task('images', () => {
       .pipe(gulp.dest(options.dist + "/content"));
 });
 
+gulp.task('watchFiles', function() {
+  gulp.watch(options.src + '/sass/**/*.scss', ['styles']);
+})
+
+//serve my project using a local web server
 gulp.task('webserver', function() {
   return gulp.src( '.' )
     .pipe(webserver({
@@ -91,6 +86,8 @@ gulp.task('build', ["clean", "scripts", "styles", "images"], () => {
              .pipe(gulp.dest(options.dist));
 });
 
-gulp.task('default', ["webserver", "clean"], () => {
+gulp.task('serve', ['watchFiles']);
+
+gulp.task('default', ["webserver", "clean", "serve"], () => {
   return gulp.start('build');
 });
