@@ -9,7 +9,8 @@ const gulp = require('gulp'),
       useref = require('gulp-useref'),
       iff = require('gulp-if'),
       csso = require('gulp-csso'),
-      del = require('del');
+      del = require('del'),
+      imagemin = require('gulp-imagemin');
 
 const options = {
   src: "src",
@@ -58,4 +59,16 @@ gulp.task("styles", () => {
       .pipe(iff('global.css', rename('all.min.css')))
       .pipe(gulp.dest(options.src + '/css'))
       .pipe(gulp.dest(options.dist + '/styles'))
+});
+
+//Optimize the size of images
+gulp.task('images', () => {
+  gulp.src(options.src + "/images/*.+(png|jpg|gif)")
+      .pipe(imagemin())
+      .pipe(gulp.dest(options.dist + "/content"));
+});
+
+//Delete all of the files and folders in the dist folder
+gulp.task('clean', () => {
+  del([options.dist , 'css/*.css*', 'js/*.js*', 'content/**']);
 });
