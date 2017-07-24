@@ -29,7 +29,6 @@ gulp.task('concatScripts', () => {
       .pipe(concat('global.js'))
       .pipe(maps.write('./'))
       .pipe(gulp.dest(options.src + '/js'))
-      .pipe(gulp.dest(options.dist + '/scripts'))
 });
 
 //Minifying scripts
