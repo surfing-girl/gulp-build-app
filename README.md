@@ -1,7 +1,6 @@
 ## About
 
 Gulp build process for preparing a front end website.
-Run the app by typing `npm start` to the console.
 
 ## Usage
 
