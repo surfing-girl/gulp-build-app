@@ -3,3 +3,6 @@ dist/
 src/css
 .DS_Store
 .sass-cache
+src/js/global.js
+src/js/global.js.map
+src/js/all.min.js
