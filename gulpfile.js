@@ -29,6 +29,7 @@ gulp.task('concatScripts', () => {
       .pipe(concat('global.js'))
       .pipe(maps.write('./'))
       .pipe(gulp.dest(options.src + '/js'))
+      .pipe(gulp.dest(options.dist + '/scripts'))
 });
 
 //Minifying scripts
@@ -65,7 +66,7 @@ gulp.task('watchFiles', function() {
 
 //serve my project using a local web server
 gulp.task('webserver', function() {
-  return gulp.src( '.' )
+  return gulp.src( './dist' )
     .pipe(webserver({
       host:             'localhost',
       port:             '3000',
