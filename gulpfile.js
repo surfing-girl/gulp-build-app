@@ -61,7 +61,7 @@ gulp.task('images', () => {
 });
 
 gulp.task('watchFiles', function() {
-  gulp.watch(options.src + '/sass/**/*.scss', ['styles']);
+  gulp.watch([options.src + '/sass/*.scss', options.src + '/sass/**/*.sass'], ['styles']);
 })
 
 //serve my project using a local web server
